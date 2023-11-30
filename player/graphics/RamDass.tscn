@@ -140,9 +140,8 @@ script = ExtResource("1_3ykt7")
 texture = ExtResource("1_2ky6c")
 hframes = 4
 vframes = 3
-frame = 8
 
-[node name="Idle_Animation" type="AnimationPlayer" parent="."]
+[node name="IdleAnimation" type="AnimationPlayer" parent="."]
 autoplay = "south"
 libraries = {
 "": SubResource("AnimationLibrary_h66o1")
