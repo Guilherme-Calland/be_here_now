@@ -1,10 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://cija2snjgk4lu"]
+[gd_scene load_steps=5 format=3 uid="uid://cija2snjgk4lu"]
 
 [ext_resource type="PackedScene" uid="uid://bcjv82jr3wfxj" path="res://player/graphics/RamDass.tscn" id="1_eqtmg"]
+[ext_resource type="Texture2D" uid="uid://cikda2141gtwc" path="res://scenary/graphics/green_tile.png" id="2_br7bg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g6e1s"]
+texture = ExtResource("2_br7bg")
+use_texture_padding = false
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gt0na"]
+tile_size = Vector2i(16, 8)
+sources/0 = SubResource("TileSetAtlasSource_g6e1s")
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_gt0na")
+format = 2
 
 [node name="RamDass" parent="." instance=ExtResource("1_eqtmg")]

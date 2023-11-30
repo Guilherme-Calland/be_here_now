@@ -13,7 +13,7 @@ config_version=5
 config/name="Be here now"
 run/main_scene="res://MainScene.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://utils/ram_dass2.svg"
+config/icon="res://icon.svg"
 
 [input]
 

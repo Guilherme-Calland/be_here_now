@@ -4,22 +4,24 @@ var speed: int = 75
 enum Direction { NORTH, SOUTH, EAST, WEST }
 var currentDirection: Direction = Direction.SOUTH
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = Vector2.ZERO
 
 	if buttonPressed(Direction.NORTH):
 		if not (buttonPressed(Direction.SOUTH) or buttonPressed(Direction.EAST) or buttonPressed(Direction.WEST)):
-			velocity.y = -speed/1.5
+			velocity.y = -speed/2
 			currentDirection = Direction.NORTH
+			turnLeftAnimation(false)
 	elif buttonPressed(Direction.SOUTH):
 		if not (buttonPressed(Direction.EAST) or buttonPressed(Direction.WEST)):
-			velocity.y = speed/1.5
+			velocity.y = speed/2
 			currentDirection = Direction.SOUTH
+			turnLeftAnimation(false)
 	elif buttonPressed(Direction.EAST):
 		if not (buttonPressed(Direction.WEST)):
 			currentDirection = Direction.EAST
 			velocity.x = speed
-		turnLeftAnimation(false)
+			turnLeftAnimation(false)
 	elif buttonPressed(Direction.WEST):
 		velocity.x = -speed
 		currentDirection = Direction.WEST
@@ -27,17 +29,19 @@ func _physics_process(delta):
 
 	move_and_slide()
 	
-	#if velocity == Vector2(0,0):
-	if true:
-		var animationKey: String = ""
-		match currentDirection:
-			Direction.NORTH:
-				animationKey = "north"
-			Direction.SOUTH:
-				animationKey = "south"
-			Direction.EAST, Direction.WEST:
-				animationKey = "horizontal"
-		$IdleAnimation.play(animationKey)
+	var animationKey: String = ""
+	if(playerIsMoving()):
+		print('moving')
+		animationKey = "walking_"
+	match currentDirection:
+		Direction.NORTH:
+			animationKey += "north"
+		Direction.SOUTH:
+			animationKey += "south"
+		Direction.EAST, Direction.WEST:
+			animationKey += "horizontal"
+	$AnimationPlayer.play(animationKey)
+		
 
 func buttonPressed(direction: Direction) -> bool:
 	match direction:
@@ -56,3 +60,6 @@ func buttonPressed(direction: Direction) -> bool:
 func turnLeftAnimation(flip: bool):
 	$Sprite.flip_h = flip
 
+func playerIsMoving():
+	return velocity != Vector2.ZERO
+	
