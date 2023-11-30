@@ -31,7 +31,6 @@ func _physics_process(_delta):
 	
 	var animationKey: String = ""
 	if(playerIsMoving()):
-		print('moving')
 		animationKey = "walking_"
 	match currentDirection:
 		Direction.NORTH:
